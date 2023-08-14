@@ -31,7 +31,6 @@ class Topping(Beverage):
     return self.quantity * 2000
 
 def OrderDrink():
-  # size = input("Ukuran Minuman (Kecil/Sedang/Besar): ")
   size = ValidateSizeInput()
   drink = Drink(size)
 
@@ -56,7 +55,7 @@ def ValidateToppingInput(prompt):
     if value.isdigit():
       return int(value)
     else:
-      print("Input salah, harus berupa angka. \n silahkan masukan kembali")
+      print("Input salah, harus berupa angka. \nsilahkan masukan kembali")
 
 def CalculateandPrintOrder(drink, toppings):
   drink_price = drink.calculate_price()
@@ -64,25 +63,15 @@ def CalculateandPrintOrder(drink, toppings):
   total_price = drink_price + topping_price
 
   clear()
-  # https://docs.python.org/3.10/library/stdtypes.html?highlight=capitalize#str.capitalize
-  # alt toupper
   print("Ukuran Minuman:", drink.size.capitalize())
-
-  # Test Accesing individual item
-  bubble_topping = toppings.get("Bubble")
-  print("Topping Test", bubble_topping.name.capitalize(), ":", bubble_topping.quantity, "pcs")
 
   for topping in toppings.values():
     print("Topping ",topping.name.capitalize(), " : ", topping.quantity, " pcs")
   print(f"Total harga: Rp {total_price}")
 
-
-
 def clear():
   print("\n" * 10)
-# using loop newline because os.system("clear") doesn't work?
 
-# menu conv c++ to python
 def main():
   print("Sistem POS Minuman \n")
 
@@ -103,5 +92,5 @@ def main():
     else:
       print("Input Salah.")
 
-# call main
+
 main()
