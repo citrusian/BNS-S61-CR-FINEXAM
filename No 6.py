@@ -31,16 +31,32 @@ class Topping(Beverage):
     return self.quantity * 2000
 
 def OrderDrink():
-  size = input("Ukuran Minuman (Kecil/Sedang/Besar): ")
-  drink = Drink(size.capitalize())
+  # size = input("Ukuran Minuman (Kecil/Sedang/Besar): ")
+  size = ValidateSizeInput()
+  drink = Drink(size)
 
   toppings = {
-    "Bubble": Topping("Bubble", int(input("Jumlah Topping Bubble: "))),
-    "Keju": Topping("Keju", int(input("Jumlah Topping Keju: "))),
-    "Agar-Agar": Topping("Agar-Agar", int(input("Jumlah Topping Agar-Agar: ")))
+    "Bubble": Topping("Bubble", ValidateToppingInput("Jumlah Topping Bubble: ")),
+    "Keju": Topping("Keju", ValidateToppingInput("Jumlah Topping Keju: ")),
+    "Agar-Agar": Topping("Agar-Agar", ValidateToppingInput("Jumlah Topping Agar-Agar: ")),
   }
-
   CalculateandPrintOrder(drink, toppings)
+
+def ValidateSizeInput():
+  while True:
+    size = input("Ukuran Minuman (Kecil/Sedang/Besar): ").capitalize()
+    if size in ["Kecil", "Sedang", "Besar"]:
+      return size
+    else:
+      print("Input salah, masukan Kecil/Sedang/Besar.")
+
+def ValidateToppingInput(prompt):
+  while True:
+    value = input(prompt)
+    if value.isdigit():
+      return int(value)
+    else:
+      print("Input salah, harus berupa angka. \n silahkan masukan kembali")
 
 def CalculateandPrintOrder(drink, toppings):
   drink_price = drink.calculate_price()
